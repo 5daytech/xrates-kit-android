@@ -50,7 +50,9 @@ class CryptoCompareProvider(private val factory: Factory, private val apiManager
 
                 emitter.onSuccess(list)
             } catch (e: Exception) {
-                emitter.onError(e)
+                if (!emitter.isDisposed) {
+                    emitter.tryOnError(e)
+                }
             }
         }
     }
@@ -71,7 +73,9 @@ class CryptoCompareProvider(private val factory: Factory, private val apiManager
                 }
                 emitter.onSuccess(rate)
             } catch (e: Exception) {
-                emitter.onError(e)
+                if (!emitter.isDisposed) {
+                    emitter.tryOnError(e)
+                }
             }
         }
 
@@ -133,7 +137,9 @@ class CryptoCompareProvider(private val factory: Factory, private val apiManager
 
                 emitter.onSuccess(stats)
             } catch (e: Exception) {
-                emitter.onError(e)
+                if (!emitter.isDisposed) {
+                    emitter.tryOnError(e)
+                }
             }
         }
 
